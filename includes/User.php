@@ -11,7 +11,7 @@ class User
     public $lastname;
 
     // déclaration des méthodes/attributs
-    public function __construct($login, $password, $email, $firstname, $lastname)
+    public function __construct()
     {
         global $conn;
     }
@@ -32,8 +32,19 @@ class User
         }
     }
 
-    public function connect()
+    public function connect($login, $password)
     {
+        global $conn;
+        $this->login = $login;
+        $this->password = $password;
+        // requete pour récupérer le contenu de la DB pour l'utilisateur concerné
+        $catchUsers = $conn->query("SELECT * FROM utilisateurs WHERE login='$login';");
+        // verifier si le login existe déjà en comptant les éventuels doublons
+        $users = mysqli_num_rows($catchUsers);
+        // fetch le contenu de la requête
+        $userInfo = $catchUsers->fetch_all();
+        // var_dump($userInfo[0][2]);
+        echo "Bienvenue " . ($userInfo[0][1]);
     }
 
     public function disconnect()
