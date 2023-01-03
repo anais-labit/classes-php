@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -11,8 +15,8 @@
 <body>
 
     <?php
-    require_once 'includes/connect.php';
-    require_once 'includes/header.php';
+    require_once './includes/User.php';
+    require_once './includes/header.php';
     ?>
 
     <h1>Bienvenue</h1>

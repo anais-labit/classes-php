@@ -1,13 +1,17 @@
 <?php
 session_start();
 require_once './includes/User.php';
+require_once './includes/header.php';
+
 
 if (isset($_POST['submit'])) {
     $login = $_POST['login'];
-    $password = $_POST['pwd'];
+    $password = $_POST['password'];
 
     $connectUser = new User($login, $password);
     $connectUser->connect($login, $password);
+    echo "Bienvenue " . ($_SESSION['login']);
+    header("Location: profil.php");
 }
 
 ?>
@@ -31,7 +35,7 @@ if (isset($_POST['submit'])) {
         <div class="formContainer">
             <form action="connexion.php" method="post">
                 <input type="text" name="login" placeholder="Login" required>
-                <input type="password" name="pwd" placeholder="Mot de passe" required>
+                <input type="password" name="password" placeholder="Mot de passe" required>
                 <input type="submit" id="log" name="submit" value="Connexion">
             </form>
         </div>

@@ -39,20 +39,36 @@ class User
         $this->password = $password;
         // requete pour récupérer le contenu de la DB pour l'utilisateur concerné
         $catchUsers = $conn->query("SELECT * FROM utilisateurs WHERE login='$login';");
-        // verifier si le login existe déjà en comptant les éventuels doublons
-        $users = mysqli_num_rows($catchUsers);
         // fetch le contenu de la requête
-        $userInfo = $catchUsers->fetch_all();
-        // var_dump($userInfo[0][2]);
-        echo "Bienvenue " . ($userInfo[0][1]);
+        $userInfo = $catchUsers->fetch_assoc();
+        $_SESSION['id'] = $userInfo['id'];
+
+        if ($userInfo['id'] === $_SESSION['id']) {
+            $_SESSION['login'] = $userInfo['login'];
+            $_SESSION['password'] = $userInfo['password'];
+            $_SESSION['email'] = $userInfo['email'];
+            $_SESSION['firstname'] = $userInfo['firstname'];
+            $_SESSION['lastname'] = $userInfo['lastname'];
+        }
     }
 
     public function disconnect()
     {
+        global $conn;
+        unset($_SESSION['login']);
+        session_destroy();
+        header("refresh:3;url=../connexion.php");
     }
 
     public function delete()
     {
+        global $conn;
+        $login = $_SESSION['login'];
+        $eraseUser = $conn->query("DELETE FROM utilisateurs WHERE login='$login';");
+        // détruire la session
+        unset($_SESSION['login']);
+        session_destroy();
+
     }
 
     public function update()

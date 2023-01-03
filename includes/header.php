@@ -19,18 +19,21 @@
         <nav>
             <ul>
                 <?php
-                if (isset($_SESSION['id'])) { ?>
+                if (isset($_SESSION['login'])) { ?>
                     <li><a href="./index.php">Accueil</a></li>
                     <li><a href="./profil.php">Gérer mon profil</a></li>
-                <?php } else { ?>
-                    <li><a href="./index.php">Accueil</a></li>
-                    <li><a href="./inscription.php">Inscription</a></li>
-                    <li><a href="./connexion.php">Connexion</a></li>
-                <?php } ?>
-
-            </ul>
-        </nav>
+                    <li><a href="./includes/logout.php">Déconnexion</a></li>
     </div>
+<?php
+                } else { ?>
+    <li><a href="./index.php">Accueil</a></li>
+    <li><a href="./inscription.php">Inscription</a></li>
+    <li><a href="./connexion.php">Connexion</a></li>
+<?php } ?>
+
+</ul>
+</nav>
+</div>
 
 </body>
 
