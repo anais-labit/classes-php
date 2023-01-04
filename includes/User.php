@@ -63,16 +63,29 @@ class User
     public function delete()
     {
         global $conn;
-        $login = $_SESSION['login'];
         $eraseUser = $conn->query("DELETE FROM utilisateurs WHERE login='$login';");
         // détruire la session
         unset($_SESSION['login']);
         session_destroy();
-
     }
 
-    public function update()
+    public function update($newLogin, $password, $email, $firstname, $lastname)
     {
+        global $conn;
+        $login = $_SESSION['login'];
+        $this->password = $password;
+        $this->login = $newLogin;
+        $this->email = $email;
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+        $upInfo = $conn->query("UPDATE utilisateurs SET login='$newLogin', password='$password', email='$email', firstname='$firstname', lastname='$lastname' WHERE login='$login'");
+        var_dump($upInfo);
+
+        if ($upInfo === TRUE) {
+            echo "Les modifications ont bien été prises en compte";
+        } else {
+            echo "bouuuuuuuuu";
+        }
     }
 
     public function isConnected()

@@ -3,14 +3,17 @@
 session_start();
 require_once './includes/User.php';
 
-$login = $_POST['login'];
-$password = $_POST['pwd'];
-$email = $_POST['email'];
-$firstname = $_POST['firstname'];
-$lastname = $_POST['lastname'];
+if (isset($_POST['submit'])) {
 
-$newUser = new User($login, $password, $email, $firstname, $lastname);
-$newUser->register($login, $password, $email, $firstname, $lastname);
+    $login = $_POST['login'];
+    $password = $_POST['pwd'];
+    $email = $_POST['email'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+
+    $newUser = new User($login, $password, $email, $firstname, $lastname);
+    $newUser->register($login, $password, $email, $firstname, $lastname);
+}
 
 ?>
 
@@ -41,7 +44,7 @@ $newUser->register($login, $password, $email, $firstname, $lastname);
                 <input type="email" placeholder="email" name="email" required>
                 <input type="text" placeholder="Prénom" name="firstname" required>
                 <input type="text" placeholder="Nom" name="lastname" required>
-                <input type="submit" value="Créer mon compte">
+                <input type="submit" name="submit" value="Créer mon compte">
             </form>
         </div>
     </div>
