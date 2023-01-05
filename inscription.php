@@ -4,8 +4,8 @@ session_start();
 require_once './includes/User.php';
 
 if (isset($_POST['submit'])) {
-
     $login = $_POST['login'];
+    
     $password = $_POST['pwd'];
     $email = $_POST['email'];
     $firstname = $_POST['firstname'];

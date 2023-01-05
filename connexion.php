@@ -10,9 +10,14 @@ if (isset($_POST['submit'])) {
 
     $connectUser = new User($login, $password);
     $connectUser->connect($login, $password);
-    echo "Bienvenue " . ($_SESSION['login']);
-    header("Location: profil.php");
+
+    echo "Bienvenue " . ($_SESSION['login']) . "<br>";
+    $displayConn = new User();
+    $displayConn->isConnected();
+    header('refresh:3; url= profil.php');
 }
+
+
 
 ?>
 

@@ -57,7 +57,7 @@ class User
         global $conn;
         unset($_SESSION['login']);
         session_destroy();
-        header("refresh:3;url=../connexion.php");
+        header('Location:../connexion.php');
     }
 
     public function delete()
@@ -90,25 +90,62 @@ class User
 
     public function isConnected()
     {
+        global $conn;
+        $login = $_SESSION['login'];
+        if (isset($login)) {
+            echo $login . ", vous êtes bien connecté";
+        } else {
+            header('Location: connexion.php');
+        }
     }
 
     public function getAllInfos()
     {
+        global $conn;
+        $login = $_SESSION['login'];
+        $catchInfos = $conn->query("SELECT * FROM utilisateurs WHERE login ='$login'");
+        $userInfo = $catchInfos->fetch_assoc();
+        $this->id = $userInfo['id'];
+        $this->password = $userInfo['password'];
+        $this->login = $userInfo['login'];
+        $this->email = $userInfo['email'];
+        $this->firstname = $userInfo['firstname'];
+        $this->lastname = $userInfo['lastname'];
     }
 
     public function getLogin()
     {
+        global $conn;
+        $login = $_SESSION['login'];
+        $catchInfos = $conn->query("SELECT login FROM utilisateurs WHERE login ='$login'");
+        $userInfo = $catchInfos->fetch_assoc();
+        $this->login = $userInfo['login'];
     }
 
     public function getEmail()
     {
+        global $conn;
+        $login = $_SESSION['login'];
+        $catchInfos = $conn->query("SELECT email FROM utilisateurs WHERE login ='$login'");
+        $userInfo = $catchInfos->fetch_assoc();
+        $this->email = $userInfo['email'];
     }
 
     public function getFirstName()
     {
+        global $conn;
+        $login = $_SESSION['login'];
+        $catchInfos = $conn->query("SELECT firstname FROM utilisateurs WHERE login ='$login'");
+        $userInfo = $catchInfos->fetch_assoc();
+        $this->firstname = $userInfo['firstname'];
     }
 
     public function getLastName()
     {
+        global $conn;
+        $login = $_SESSION['login'];
+        $catchInfos = $conn->query("SELECT lastname FROM utilisateurs WHERE login ='$login'");
+        $userInfo = $catchInfos->fetch_assoc();
+        $this->lastname = $userInfo['lastname'];
     }
 }

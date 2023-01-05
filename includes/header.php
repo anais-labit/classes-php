@@ -1,4 +1,6 @@
 <?php
+require_once './includes/User.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +21,9 @@
         <nav>
             <ul>
                 <?php
-                if (isset($_SESSION['login'])) { ?>
+
+                if (isset($_SESSION['login'])) {
+?>
                     <li><a href="./index.php">Accueil</a></li>
                     <li><a href="./profil.php">Gérer mon profil</a></li>
                     <li><a href="./includes/logout.php">Déconnexion</a></li>
