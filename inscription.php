@@ -1,17 +1,21 @@
 <?php
 // démarrer une session
 session_start();
-require_once './includes/User.php';
+// require_once './includes/User.php';
+require_once './includes/user-pdo.php';
 
 if (isset($_POST['submit'])) {
     $login = $_POST['login'];
-    
+
     $password = $_POST['pwd'];
     $email = $_POST['email'];
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
 
-    $newUser = new User($login, $password, $email, $firstname, $lastname);
+    // $newUser = new User($login, $password, $email, $firstname, $lastname);
+    // $newUser->register($login, $password, $email, $firstname, $lastname);
+
+    $newUser = new User_pdo($login, $password, $email, $firstname, $lastname);
     $newUser->register($login, $password, $email, $firstname, $lastname);
 }
 
